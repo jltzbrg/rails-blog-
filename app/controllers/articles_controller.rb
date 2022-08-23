@@ -26,6 +26,16 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update(articles_params)
+      redirect_to articles_path
+    else 
+      render :edit
+    end
+  end
+
   private
   def articles_params
     params.require(:article).permit(:title, :content)
